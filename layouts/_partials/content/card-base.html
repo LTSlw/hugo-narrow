@@ -69,12 +69,14 @@
         <!-- 元信息 -->
         <div class="text-muted-foreground mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
           <!-- 时间信息行 -->
+          {{ if not $page.Date.IsZero }}
           <div class="flex items-center gap-1.5">
             {{ partial "features/icon.html" (dict "name" "calendar" "size" "sm" "ariaLabel" "") }}
             <time datetime="{{ $page.Date.Format `2006-01-02` }}" class="font-medium">
               {{ partial "helpers/date.html" (dict "date" $page.Date "variant" "long") }}
             </time>
           </div>
+          {{ end }}
 
           <!-- 预计阅读时间 -->
           {{ if $page.ReadingTime }}

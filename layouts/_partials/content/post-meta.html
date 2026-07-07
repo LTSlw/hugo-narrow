@@ -43,12 +43,14 @@
           <!-- 发布时间和阅读时间 -->
           <div class="text-muted-foreground flex flex-wrap items-center gap-3 text-sm mb-4">
             <!-- 发布时间 -->
+            {{ if not .Date.IsZero }}
             <div class="flex items-center gap-2">
               {{ partial "features/icon.html" (dict "name" "calendar" "size" "sm" "ariaLabel" "") }}
               <time datetime="{{ .Date.Format `2006-01-02` }}">
                 {{ partial "helpers/date.html" (dict "date" .Date "variant" "long") }}
               </time>
             </div>
+            {{ end }}
 
             <!-- 阅读时间 -->
             {{ with .ReadingTime }}

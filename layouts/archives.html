@@ -88,12 +88,14 @@
 
                         <!-- 文章元信息 -->
                         <div class="text-muted-foreground flex items-center gap-4 text-xs">
+                          {{ if not .Date.IsZero }}
                           <div class="flex items-center gap-1">
                             {{ partial "features/icon.html" (dict "name" "calendar" "size" "xs" "ariaLabel" "") }}
                             <time datetime="{{ .Date.Format `2006-01-02` }}">
                               {{ partial "helpers/date.html" (dict "date" .Date "variant" "short") }}
                             </time>
                           </div>
+                          {{ end }}
 
                           {{ if .Params.categories }}
                             <div class="flex items-center gap-1">
