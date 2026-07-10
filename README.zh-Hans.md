@@ -25,7 +25,7 @@
 
 ## 📄 许可证
 
-本项目基于 [MIT 许可证](LICENSE) 开源。
+本项目基于 [GNU 许可证](LICENSE) 开源。
 
 ## 🙏 致谢
 
@@ -41,8 +41,3 @@
 - [iconify](https://iconify.design/)
 - [Awesome-Merge-Picture](https://github.com/XiCheng148/Awesome-Merge-Picture)
 
----
-
-## ⭐ Star 历史
-
-[![Star History Chart](https://api.star-history.com/image?repos=tom2almighty/hugo-narrow&type=timeline&legend=top-left)](https://www.star-history.com/?repos=tom2almighty%2Fhugo-narrow&type=timeline&legend=top-left)
