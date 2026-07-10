@@ -41,8 +41,3 @@ This project is open source under the [MIT License](LICENSE).
 - [iconify](https://iconify.design/)
 - [Awesome-Merge-Picture](https://github.com/XiCheng148/Awesome-Merge-Picture)
 
----
-
-## ⭐ Star History
-
-[![Star History Chart](https://api.star-history.com/image?repos=tom2almighty/hugo-narrow&type=timeline&legend=top-left)](https://www.star-history.com/?repos=tom2almighty%2Fhugo-narrow&type=timeline&legend=top-left)
