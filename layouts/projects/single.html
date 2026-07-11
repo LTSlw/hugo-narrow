@@ -46,14 +46,14 @@
   <div class="mb-12">
     <div class="flex flex-wrap items-center gap-2.5 text-sm font-medium">
       {{ if not .Date.IsZero }}
-      <span
-        class="bg-muted/45 text-foreground border-border inline-flex h-10 items-center gap-2 rounded-lg border px-3.5 shadow-sm"
-      >
-        {{ partial "features/icon.html" (dict "name" "calendar" "size" "sm" "class" "text-primary shrink-0" "hidden" true) }}
-        <time datetime="{{ .Date.Format `2006-01-02` }}">
-          {{ partial "helpers/date.html" (dict "date" .Date "variant" "long") }}
-        </time>
-      </span>
+        <span
+          class="bg-muted/45 text-foreground border-border inline-flex h-10 items-center gap-2 rounded-lg border px-3.5 shadow-sm"
+        >
+          {{ partial "features/icon.html" (dict "name" "calendar" "size" "sm" "class" "text-primary shrink-0" "hidden" true) }}
+          <time datetime="{{ .Date.Format `2006-01-02` }}">
+            {{ partial "helpers/date.html" (dict "date" .Date "variant" "long") }}
+          </time>
+        </span>
       {{ end }}
 
       {{ if .Params.status }}
