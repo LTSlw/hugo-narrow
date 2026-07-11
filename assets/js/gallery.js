@@ -48,8 +48,7 @@ class SmartGalleryLayoutManager {
     };
 
     const gallery = new SmartGallery(container, options);
-    gallery.addItems(items);
-    gallery.render();
+    gallery.setItems(items);
 
     this.instances.set(container.id, {
       gallery,
@@ -67,9 +66,7 @@ class SmartGalleryLayoutManager {
       return;
     }
 
-    instance.gallery.destroy();
-    this.instances.delete(containerId);
-    this.initialize(instance.container, instance.items, newLayout, instance.onItemClick);
+    instance.gallery.setOptions({ layout: newLayout });
   }
 
   destroy() {

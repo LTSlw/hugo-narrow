@@ -99,7 +99,10 @@
 
 {{/* Gallery JavaScript */}}
 {{ if .Scratch.Get "galleryEnabled" }}
-  <script src="{{ `js/smart-gallery.min.js` | relURL }}" defer></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/smart-gallery@latest/dist/smart-gallery.umd.js"
+    defer
+  ></script>
 {{ end }}
 
 {{ if or (.Scratch.Get "galleryEnabled") (.Scratch.Get "lightboxEnabled") }}
