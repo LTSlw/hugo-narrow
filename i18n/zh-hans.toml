@@ -63,6 +63,10 @@
 
     languageToggle = "切换语言"
 
+    contentWidth       = "页面宽度"
+    contentWidthReset  = "恢复默认"
+    contentWidthToggle = "调整页面宽度"
+
 [license]
     title  = "版权声明"
     author = "作者"

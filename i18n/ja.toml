@@ -63,6 +63,10 @@
 
     languageToggle = "言語を切替"
 
+    contentWidth       = "ページ幅"
+    contentWidthReset  = "既定値に戻す"
+    contentWidthToggle = "ページ幅を調整"
+
 [license]
     title  = "ライセンス"
     author = "著者"

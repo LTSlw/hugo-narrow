@@ -72,6 +72,10 @@
 
     languageToggle = "Сменить язык"
 
+    contentWidth       = "Ширина страницы"
+    contentWidthReset  = "Восстановить по умолчанию"
+    contentWidthToggle = "Настроить ширину страницы"
+
 [license]
     title  = "Лицензия"
     author = "Автор"

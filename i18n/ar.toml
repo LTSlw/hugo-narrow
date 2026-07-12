@@ -78,6 +78,10 @@
 
     languageToggle = "تغيير اللغة"
 
+    contentWidth       = "عرض الصفحة"
+    contentWidthReset  = "استعادة الافتراضي"
+    contentWidthToggle = "ضبط عرض الصفحة"
+
 [license]
     title  = "الترخيص"
     author = "المؤلف"

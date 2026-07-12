@@ -63,6 +63,10 @@
 
     languageToggle = "切換語言"
 
+    contentWidth       = "頁面寬度"
+    contentWidthReset  = "恢復預設"
+    contentWidthToggle = "調整頁面寬度"
+
 [license]
     title  = "版權聲明"
     author = "作者"

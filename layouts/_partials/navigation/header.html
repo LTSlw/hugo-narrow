@@ -122,6 +122,10 @@
 
       <!-- 右侧：桌面端控制区域 -->
       <div class="flex items-center space-x-2">
+        <!-- 页面宽度调整（仅桌面端） -->
+        {{ partial "ui/content-width-switcher.html" . }}
+
+
         <!-- 语言切换按钮 -->
         {{ partial "ui/language-switcher.html" . }}
 

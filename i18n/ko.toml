@@ -63,6 +63,10 @@
 
     languageToggle = "언어 전환"
 
+    contentWidth       = "페이지 너비"
+    contentWidthReset  = "기본값 복원"
+    contentWidthToggle = "페이지 너비 조절"
+
 [license]
     title  = "라이선스"
     author = "작성자"

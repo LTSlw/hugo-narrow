@@ -2,7 +2,8 @@
 class ToolDropdown {
   constructor(uiManager) {
     this.ui = uiManager;
-    this.types = ["color-scheme", "theme", "language"];
+    this.types = ["color-scheme", "theme", "language", "content-width"];
+    this.originalPositions = new WeakMap();
     this.setup();
   }
 
@@ -29,14 +30,44 @@ class ToolDropdown {
 
         if (isHidden) {
           dropdown.classList.remove("hidden");
+          if (type === "content-width") {
+            this.freezePosition(dropdown);
+          }
           toggle.setAttribute("aria-expanded", "true");
           return;
         }
 
         dropdown.classList.add("hidden");
+        this.releasePosition(dropdown);
         toggle.setAttribute("aria-expanded", "false");
       });
     });
+  }
+
+  freezePosition(dropdown) {
+    const rect = dropdown.getBoundingClientRect();
+    this.originalPositions.set(dropdown, {
+      parent: dropdown.parentNode,
+      nextSibling: dropdown.nextSibling,
+    });
+    document.body.append(dropdown);
+    Object.assign(dropdown.style, {
+      position: "fixed",
+      top: `${rect.top}px`,
+      right: "auto",
+      bottom: "auto",
+      left: `${rect.left}px`,
+      width: `${rect.width}px`,
+    });
+  }
+
+  releasePosition(dropdown) {
+    dropdown.removeAttribute("style");
+    const position = this.originalPositions.get(dropdown);
+    if (!position) return;
+
+    position.parent.insertBefore(dropdown, position.nextSibling);
+    this.originalPositions.delete(dropdown);
   }
 
   closeAll(exceptToggle = null, exceptDropdown = null) {
@@ -46,6 +77,7 @@ class ToolDropdown {
         .forEach((dropdown) => {
           if (dropdown === exceptDropdown) return;
           dropdown.classList.add("hidden");
+          this.releasePosition(dropdown);
         });
 
       document
@@ -300,6 +332,7 @@ class UIManager {
     this.toolDropdown = new ToolDropdown(this);
     this.exposeAPI();
     this.setupGlobalListeners();
+    this.setupContentWidthControl();
     this.updateUI();
   }
 
@@ -354,6 +387,62 @@ class UIManager {
       if (this.theme !== "system") return;
       this.applyTheme();
       this.updateUI();
+    });
+
+    window.addEventListener("resize", () => this.closeAllMenus());
+  }
+
+  setupContentWidthControl() {
+    const container = document.getElementById("page-container");
+    const range = document.getElementById("content-width-range");
+    const output = document.getElementById("content-width-value");
+    const reset = document.getElementById("content-width-reset");
+    if (!container || !range || !output || !reset) return;
+
+    const min = Number(range.min);
+    const max = Number(range.max);
+    const clamp = (value) => Math.min(max, Math.max(min, Math.round(value)));
+    const storedWidth = Number.parseInt(localStorage.getItem("contentWidth"), 10);
+    const rootFontSize = Number.parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+    const defaultWidth = Number.parseFloat(getComputedStyle(container).maxWidth) / rootFontSize;
+    const hasStoredWidth =
+      Number.isInteger(storedWidth) && storedWidth >= min && storedWidth <= max;
+    const initialWidth = hasStoredWidth ? storedWidth : defaultWidth;
+
+    const updateControl = (value) => {
+      const width = clamp(value);
+      range.value = String(width);
+      output.value = `${width}rem`;
+      output.textContent = `${width}rem`;
+      return width;
+    };
+
+    updateControl(initialWidth);
+
+    let updateFrame = null;
+    let pendingWidth = initialWidth;
+
+    range.addEventListener("input", () => {
+      const width = updateControl(Number(range.value));
+      pendingWidth = width;
+      if (updateFrame !== null) return;
+
+      updateFrame = requestAnimationFrame(() => {
+        document.documentElement.style.setProperty("--content-width", `${pendingWidth}rem`);
+        localStorage.setItem("contentWidth", String(pendingWidth));
+        updateFrame = null;
+      });
+    });
+
+    reset.addEventListener("click", () => {
+      if (updateFrame !== null) {
+        cancelAnimationFrame(updateFrame);
+        updateFrame = null;
+      }
+      localStorage.removeItem("contentWidth");
+      document.documentElement.style.removeProperty("--content-width");
+      const configuredWidth = Number.parseFloat(getComputedStyle(container).maxWidth) / rootFontSize;
+      updateControl(configuredWidth);
     });
   }
 

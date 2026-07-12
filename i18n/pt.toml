@@ -66,6 +66,10 @@
 
     languageToggle = "Trocar idioma"
 
+    contentWidth       = "Largura da página"
+    contentWidthReset  = "Restaurar padrão"
+    contentWidthToggle = "Ajustar largura da página"
+
 [license]
     title  = "Licença"
     author = "Autor"
